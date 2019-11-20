@@ -1,0 +1,110 @@
+.navbar{
+  opacity: 0.9;
+  height: 9vh;
+  /* position: relative; */
+
+}
+
+
+.bond{
+  margin-top: 9vh;
+  border: black 3px black;
+  min-height: 100vh;
+}
+
+.box1{
+  background-image: url(../img/pamir.jpg);
+  background-position: center center;
+  height: 95vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.box2{
+  height: 90vh;
+}
+
+.box2_1{
+  margin-top: 8%;
+  height: 80%;
+  background-image: url(../img/driver.jpg);
+  background-position: center center ;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.text-center{
+  padding-top: 75vh;
+  padding-right: 24vh;
+}
+
+.text-center_1{
+  padding-top: 30vh;
+  padding-right: 24vh;
+}
+
+                              /* Finding a Trip */
+.box_list{
+  height: 100vh;
+  background-color: rgb(246, 246, 246);
+  /* position: relative; */
+}
+
+.sbu_box_list1{
+  height: 30vh;
+  width: 60%;
+  top: 2vh;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+}
+
+.list_pic{
+  width: 15%;
+  height: 45%;
+  display: inline-block;
+  position: absolute;
+  left: 2%;
+  top: 3%;
+}
+
+.list_pic > img {
+  width: 100%;
+  height: 100%;
+}
+
+.sbu_box_list2{
+  width: 75%;
+  height: 15%;
+  border-bottom: 1px solid rgba(74, 74, 74, 0.72);
+  position: absolute;
+  right: 4%;
+  display: inline;
+}
+
+.time_autoriz{
+  display: inline;
+  font-size: 50%;
+}
+
+.sbu_box_list3{
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  right: 0%;
+  bottom: 0%;
+  display: inline;
+}
+
+                          /* Upload trip */
+.trip_detail{
+  height: 100vh;
+  background-color: rgb(176, 161, 210);
+}
+
+.detail_box{
+  border: 1px solid black;
+  width: 60%;
+  height: 60vh;
+  padding-top: 20%;
+}
