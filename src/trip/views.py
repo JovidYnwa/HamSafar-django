@@ -31,11 +31,11 @@ class TripCreateView(CreateView):
 
 #View for Ajax call
 def load_cities(request):
-    country_id = request.GET.get('country')
-    cities     = Cities_dir.objects.filter(country_id=country_id).order_by('city_name')
+    from_country_id = request.GET.get('from_country')
+    from_cities     = Cities_dir.objects.filter(country_id=from_country_id).order_by('city_name')
 
     context = {
-        'cities': cities
+        'from_cities': from_cities 
     }
-    
+
     return render(request, 'trip/cities_dropdown_list_options.html', context)
