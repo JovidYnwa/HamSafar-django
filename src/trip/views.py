@@ -33,4 +33,9 @@ class TripCreateView(CreateView):
 def load_cities(request):
     country_id = request.GET.get('country')
     cities     = Cities_dir.objects.filter(country_id=country_id).order_by('city_name')
-    return render(request, 'trip/cities_dropdown_list_options.html', {'cities': cities})
+
+    context = {
+        'cities': cities
+    }
+    
+    return render(request, 'trip/cities_dropdown_list_options.html', context)

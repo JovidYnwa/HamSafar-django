@@ -25,8 +25,8 @@ class Cities_dir(models.Model):
 
 class Trips_daily(models.Model):
     price = models.CharField(max_length=50)
-    country = models.ForeignKey(Countries_dir, related_name='from_country', on_delete=models.CASCADE)
-    city    = models.ForeignKey(Cities_dir, related_name='from_city', on_delete=models.CASCADE)
+    from_country = models.ForeignKey(Countries_dir, related_name='from_country', on_delete=models.CASCADE)
+    from_city    = models.ForeignKey(Cities_dir, related_name='from_city', on_delete=models.CASCADE)
 
 
 

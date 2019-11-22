@@ -15,7 +15,7 @@
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
-    $("#id_country").change(function () {
+    $("#id_from_country").change(function () {
       var url = $("#Trips_dailyForm").attr("data-cities-url");  // get the url of the `load_cities` view
       var countryId = $(this).val();  // get the selected country ID from the HTML input
 
@@ -25,7 +25,7 @@
           'country': countryId       // add the country id to the GET parameters
         },
         success: function (data) {   // `data` is the return of the `load_cities` view function
-          $("#id_city").html(data);  // replace the contents of the city input with the data that came from the server
+          $("#id_from_city").html(data);  // replace the contents of the city input with the data that came from the server
         }
       });
 
