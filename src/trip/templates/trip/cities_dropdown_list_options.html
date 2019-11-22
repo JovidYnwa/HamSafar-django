@@ -3,3 +3,8 @@
 {{ city.pk }}
 <option value="{{ city.pk }}">{{ city.city_name }}</option>
 {% endfor %}
+
+{% for city in to_cities %}
+{{ city.pk }}
+<option value="{{ city.pk }}">{{ city.city_name }}</option>
+{% endfor %}
