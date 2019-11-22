@@ -13,7 +13,7 @@ class Countries_dir(models.Model):
     country_code = models.CharField(max_length = 50)
 
     def __str__(self):
-        return '{} {}'.format(self.country_name, self.country_code)
+        return '{}'.format(self.country_name)
 
 class Cities_dir(models.Model):
     country = models.ForeignKey(Countries_dir, on_delete=models.CASCADE)
@@ -21,13 +21,13 @@ class Cities_dir(models.Model):
     city_code = models.CharField(max_length = 50)
 
     def __str__(self):
-        return '{} {}'.format(self.country, self.city_name, self.city_code)
+        return '{}'.format(self.city_name)
 
 class Trips_daily(models.Model):
-    from_country = models.ForeignKey(Countries_dir, related_name='from_country', on_delete=models.CASCADE)
-    from_city    = models.ForeignKey(Cities_dir, related_name='from_city', on_delete=models.CASCADE)
-    to_country   = models.ForeignKey(Countries_dir, related_name='to_country', on_delete=models.CASCADE)
-    to_city      = models.ForeignKey(Cities_dir, related_name='to_city', on_delete=models.CASCADE)
+    price = models.CharField(max_length=50)
+    country = models.ForeignKey(Countries_dir, related_name='from_country', on_delete=models.CASCADE)
+    city    = models.ForeignKey(Cities_dir, related_name='from_city', on_delete=models.CASCADE)
+
 
 
 
