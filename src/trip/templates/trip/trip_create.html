@@ -32,16 +32,16 @@
     });
 
     $("#id_to_country").change(function () {
-      var url = $("#Trips_dailyForm").attr("data-cities-url");  // get the url of the `load_cities` view
-      var to_countryId = $(this).val();  // get the selected country ID from the HTML input
+      var url = $("#Trips_dailyForm").attr("data-cities-url");  
+      var to_countryId = $(this).val();  
 
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      $.ajax({                       
+        url: url,                    
         data: {
-          'to_country': to_countryId       // add the country id to the GET parameters
+          'to_country': to_countryId       
         },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          $("#id_to_city").html(data);  // replace the contents of the city input with the data that came from the server
+        success: function (data) {   
+          $("#id_to_city").html(data); 
         }
       });
 

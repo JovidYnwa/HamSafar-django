@@ -34,4 +34,6 @@ class Locations_dicAdmin(admin.ModelAdmin):
     list_display = ('country', 'city_name', 'city_code', 'country_id')
 
 
-admin.site.register(Trips_daily)
+@admin.register(Trips_daily)
+class Trips_dailycAdmin(admin.ModelAdmin):
+    list_display = ('from_city', 'to_city')
