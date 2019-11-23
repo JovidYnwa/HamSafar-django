@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'hamsafar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hamsafar',
+        'NAME': 'Hamsafar',
         'USER': 'postgres',
         'PASSWORD': 'Oracle@2',
         'HOST': '127.0.0.1',

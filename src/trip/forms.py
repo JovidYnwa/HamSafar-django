@@ -2,9 +2,20 @@ from django import forms
 from .models import Trips_daily, Cities_dir
 
 class Trips_dailyForm(forms.ModelForm):
+
+ #   from_country = forms.TypedChoiceField(label = 'Страна Отправки',
+ #                    widget=forms.TextInput(attrs={"placeholder": "Выберете страну"}))
+    from_city    = forms.Select()
+  #  description  = forms.Textarea()
     class Meta:
         model = Trips_daily
-        fields = ('from_country', 'from_city', 'to_country', 'to_city')
+        fields = ('from_country',
+                  'from_city',
+                  'to_country',
+                  'to_city',
+                  'description',
+                  'trip_day'
+            )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

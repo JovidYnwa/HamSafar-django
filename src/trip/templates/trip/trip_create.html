@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %} 
 
 {% block content %}
 
+<div class="col-5">
+  
   <h2>Person Form</h2>
 
   <form method="post" id="Trips_dailyForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
     {% csrf_token %}
     <table>
-      {{ form.as_table }}
+      {{ form|crispy }}
     </table>
     <button type="submit">Save</button>
     <a href="{% url 'home' %}">Nevermind</a>
   </form>
+
+</div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>

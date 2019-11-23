@@ -4,9 +4,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    user       = models.OneToOneField(User, on_delete = models.CASCADE)
     user_phone = PhoneNumberField()
-    user_img = models.ImageField(upload_to=None, blank=True, null=True)
+    user_img   = models.ImageField(upload_to=None, blank=True, null=True)
 
 class Countries_dir(models.Model):
     country_name = models.CharField(max_length = 50)
@@ -16,7 +16,7 @@ class Countries_dir(models.Model):
         return '{}'.format(self.country_name)
 
 class Cities_dir(models.Model):
-    country = models.ForeignKey(Countries_dir, on_delete=models.CASCADE)
+    country   = models.ForeignKey(Countries_dir, on_delete=models.CASCADE)
     city_name = models.CharField(max_length = 50)
     city_code = models.CharField(max_length = 50)
 
@@ -28,6 +28,12 @@ class Trips_daily(models.Model):
     from_city    = models.ForeignKey(Cities_dir, related_name='from_city', on_delete=models.CASCADE)
     to_country   = models.ForeignKey(Countries_dir, related_name='to_country', on_delete=models.CASCADE)
     to_city      = models.ForeignKey(Cities_dir, related_name='to_city', on_delete=models.CASCADE)
+    trip_day     = models.DateTimeField(auto_now=False, auto_now_add=False)
+    description  = models.TextField(max_length = 250, blank = True)
+    date_posted  = models.DateTimeField( auto_now_add=True)
+
+    def __srt__(self):
+        return '{} - {}'.format(self.from_city, self.to_city)
 
 
 

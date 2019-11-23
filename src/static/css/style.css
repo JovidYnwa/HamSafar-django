@@ -5,6 +5,11 @@
 
 }
 
+/* The * that come after label in forms */
+.asteriskField{
+  display: none;
+}
+
 
 .bond{
   margin-top: 9vh;

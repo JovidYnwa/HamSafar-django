@@ -8,7 +8,7 @@ urlpatterns = [
     path('main/', main_view, name='home'),
     path('accounts/profile/', profile_view,  name='account_profile'),
 
-    path('add/', TripCreateView.as_view()),
+    path('add/', TripCreateView.as_view(), name='trip_add'),
     path('ajax/load-cities/', load_cities, name='ajax_load_cities'),
 ]
 
