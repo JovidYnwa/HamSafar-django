@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+        <p>Страна отправки {{trip.from_country}}</p>
+        <p>Страна назначение  {{trip.to_country}}</p>
+        <p>Город отправки {{trip.from_city}}</p>
+        <p>Город назначения {{trip.to_city}}</p>
+        <p>Описание {{trip.description}}</p>
+        <p>Стоимость {{trip.price}}</p>
+        <p>Опубликовоно {{trip.date_posted}}</p>
+        <p>Дата Поездки {{trip.date_posted}}</p>
+
+        <button> <a href='{{trip.get_update_url}}'>Изменить </button>
+
+
+
+{% endblock %}

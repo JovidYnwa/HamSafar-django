@@ -4,19 +4,27 @@
 
 <div class="container-fluid  box1">
     <div class="container text-center">
-      <button type="button" class="btn btn-outline-light btn-lg"><strong>Найи Поездку</strong></button>
+      <button type="button" class="btn btn-outline-light btn-lg">
+        <a href="{% url 'list_of_trips' %}" style='text-decoration:none; color: inherit;'>
+          <strong>Найи Поездку</strong>
+        </a>
+      </button>
     </div>
   </div>
 
   <div class="row container-fluid box2">
-    <div class="col" style ="width: 70%;">
+    <div class="col" style ="width: 70%;">  
       <div class="container-fluid box2_1"> </div>
     </div>
     <div class="col subbox2_1">
       <div class="container-fluid box2_2">
         <div class="container text-center_1">
           <h2>Найди себе поптучиков предложи выгодную поездку</h2>
-          <button type="button" class="btn btn-info btn-lg"><strong>Предложить</strong></button>
+          <button type="button" class="btn btn-info btn-lg">
+            <a href="{% url 'trip_add' %}" style='text-decoration:none; color: inherit;'>
+              <strong>Предложить</strong>
+            </a>
+          </button>
         </div>
       </div>
     </div>

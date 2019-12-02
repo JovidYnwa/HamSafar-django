@@ -1,13 +1,71 @@
-from django.views.generic import ListView, CreateView, UpdateView
-from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import (render,
+                              redirect,
+                              get_object_or_404)
 from django.urls import reverse_lazy
+from django.contrib import messages
+from django.http import HttpResponse
+
 from .models import Trips_daily
 from .forms import Trips_dailyForm, Cities_dir
 
 
 def main_view(request):
     return render(request, 'trip/index.html', {})
+
+@login_required(login_url='account_login')
+def trip_creat_view(request):
+    form   = Trips_dailyForm(request.POST or None)
+    errors = None
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.owner = request.user
+        instance.save()
+    if form.errors:
+        errors = form.errors
+
+    template_name = 'trip/trip_create.html'
+    context = {
+        "form":form,
+        "errors":errors
+    }
+    return render(request, template_name, context)
+
+def list_of_trip(request):
+#    owner = request.user
+    trips_query = Trips_daily.objects.all().order_by('-date_posted')
+#    owner_query = User_daily.objects.get
+    template_name = 'trip/trips_list.html'
+    context = {
+        'trips' : trips_query,
+ #       'owner' : owner
+    }
+    return render(request, template_name, context)
+
+def detail_of_trip(request, id):
+    trip_query = get_object_or_404(Trips_daily, id=id)
+    context = {
+        'trip': trip_query
+    }
+    return render(request, 'trip/trip_detail.html', context)
+
+def edit_of_trip(request, id):
+    trip_query = get_object_or_404(Trips_daily, id=id)
+    form = Trips_dailyForm(request.POST or None, instance= trip_query)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        if request.user == instance.owner:
+            form.save()
+            messages.info(request, 'Данные были обновлены')
+            return redirect('../')
+        else:
+            return HttpResponse('This is not your post pice shit!!!')
+    template_name = 'trip/trip_create.html'
+    context = {
+        'form' : form
+    }
+    return render(request, template_name, context)
 
 def profile_view(request):
     greetting = 'Hey!'
@@ -21,13 +79,6 @@ def profile_view(request):
     }
     return render(request, 'account/profile.html', context)
 
-    #Forms for creating for trips
-class TripCreateView(CreateView):
-    model = Trips_daily
-    form_class = Trips_dailyForm
- #   fields = ('from_country', 'from_city', 'to_country', 'to_city')
-    template_name = 'trip/trip_create.html'
-    success_url   = reverse_lazy('home')
 
 #View for Ajax call
 def load_cities(request):
@@ -45,3 +96,12 @@ def load_cities(request):
     }
 
     return render(request, 'trip/cities_dropdown_list_options.html', context)
+
+
+    #Forms for creating for trips
+""" class TripCreateView(CreateView):
+    model = Trips_daily
+    form_class = Trips_dailyForm
+ #   fields = ('from_country', 'from_city', 'to_country', 'to_city')
+    template_name = 'trip/trip_create.html'
+    success_url   = reverse_lazy('home') """

@@ -3,19 +3,21 @@
 
 {% block content %}
 
-<div class="col-5">
-  
-  <h2>Person Form</h2>
+<div class="row justify-content-center">
+  <div class="col-5 add_trip_box">
+    
+    <h2>Форма поездки</h2>
 
-  <form method="post" id="Trips_dailyForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
-    {% csrf_token %}
-    <table>
-      {{ form|crispy }}
-    </table>
-    <button type="submit">Save</button>
-    <a href="{% url 'home' %}">Nevermind</a>
-  </form>
+    <form method="post" id="Trips_dailyForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+      {% csrf_token %}
+      <table>
+        {{ form|crispy }}
+      </table>
+        <button type="submit" class="btn btn-info">Сохранить</button>
+        <a href="{% url 'home' %}">Вернутся</a>
+    </form>
 
+  </div>
 </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+{% for trip in trips %}
+
+<div class="d-flex flex-row col-7 trips_list">        
+    <div class="col-2" style = height: 30vh;">
+        <img src=".img/list_pic.jpg" class="rounded-circle" width="100%" height="50%" >
+    </div>
+
+  <div class="d-flex flex-column col-10" style = position: relative;">
+        <div style="border-bottom:1px solid black; width:100%; height:20%">
+         <h3 style="font-size: 1.6vw;" class = "text-primary">{{trip.owner.first_name}}<p class = "time_autoriz text-muted"> <strong>{{trip.date_posted}}</strong></p></h3>
+        </div>
+
+        <div style="width:100%; height:80%">
+            <div>
+                <h3 style="font-size: 1.8vw;">
+                    <a href= '{{ trip.get_absolute_url }}'>{{trip.from_city}} - {{trip.to_city}}</a>
+                </h3>
+            </div>
+            <div>
+                <p style="font-size: 1.1vw;">{{trip.description}}</p>
+            </div>
+        </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
