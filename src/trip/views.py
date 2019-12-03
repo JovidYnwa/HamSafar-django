@@ -10,6 +10,32 @@ from django.http import HttpResponse
 from .models import Trips_daily
 from .forms import Trips_dailyForm, Cities_dir
 
+#third party importts
+from rest_framework import generics
+from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+from .serializers import Trips_dailySerializer, UserSerializer
+
+
+class TestView(APIView):
+    def get(self, request, *args, **kwargs):
+        qs = Trips_daily.objects.all()
+        serialize = Trips_dailySerializer(qs, many = True)
+        return Response(serialize.data)
+    
+    def post(self, request, *args, **kwags):
+        serializer = Trips_dailySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+
+class UserCreateAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
 
 def main_view(request):
     return render(request, 'trip/index.html', {})

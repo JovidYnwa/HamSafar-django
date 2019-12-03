@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'crispy_forms',
     'phonenumber_field',
+    'rest_framework',
 
     #own
     'trip',
