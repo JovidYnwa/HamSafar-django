@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phonenumber_field',
     'rest_framework',
+    'rest_framework.authtoken',
+
 
     #own
     'trip',
@@ -154,4 +156,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ACCOUNT_LOGOUT_REDIRECT_URL ='home'
 
+# Rest Api
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 

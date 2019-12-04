@@ -12,7 +12,7 @@ from .forms import Trips_dailyForm, Cities_dir
 
 #third party importts
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -20,6 +20,9 @@ from .serializers import Trips_dailySerializer, UserSerializer
 
 
 class TestView(APIView):
+
+    permission_classes = (IsAuthenticated,)
+
     def get(self, request, *args, **kwargs):
         qs = Trips_daily.objects.all()
         serialize = Trips_dailySerializer(qs, many = True)
@@ -59,13 +62,10 @@ def trip_creat_view(request):
     return render(request, template_name, context)
 
 def list_of_trip(request):
-#    owner = request.user
     trips_query = Trips_daily.objects.all().order_by('-date_posted')
-#    owner_query = User_daily.objects.get
     template_name = 'trip/trips_list.html'
     context = {
         'trips' : trips_query,
- #       'owner' : owner
     }
     return render(request, template_name, context)
 

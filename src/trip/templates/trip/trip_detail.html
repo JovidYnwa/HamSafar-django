@@ -11,7 +11,9 @@
         <p>Опубликовоно {{trip.date_posted}}</p>
         <p>Дата Поездки {{trip.date_posted}}</p>
 
-        <button> <a href='{{trip.get_update_url}}'>Изменить </button>
+        {% if request.user == trip.owner %}
+                <button> <a href='{{trip.get_update_url}}'>Изменить </button>
+        {% endif %}
 
 
 
