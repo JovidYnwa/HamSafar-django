@@ -7,10 +7,12 @@ from .views import (main_view,
                     list_of_trip,
                     detail_of_trip,
                     edit_of_trip,
-                    #APIVIEWS
+                    #APIVIEWS   
                     TestView,
-                    UserCreateAPIView
-                    )
+                    UserCreateAPIView,
+                    CreatListView,
+                    TripsDetailView,
+            )
 
 from rest_framework.documentation import include_docs_urls
 
@@ -27,11 +29,13 @@ urlpatterns = [
 
     #If you're intending to use the browsable API you'll probably also want to add REST framework's
     #login and logout views
+    path('rest-auth/', include('rest_auth.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('apiviews/', TestView.as_view()),
     path('api/usercreation/', UserCreateAPIView.as_view()),
-
-    #path('api/docs/', include_docs_urls(title='My API')),
+    path('api/create-list/', CreatListView.as_view(), name ='create-list-view'),
+    path('api/trip-detail/<int:pk>/', TripsDetailView.as_view(), name = 'trip-detail'),
+    path('api/docs/', include_docs_urls(title='HamSafar API')),
 
 ]
 

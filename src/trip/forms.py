@@ -39,7 +39,7 @@ class Trips_dailyForm(forms.ModelForm):
 #            self.fields['from_city'].queryset = self.instance.from_country.from_city_set.order_by('name')
 #            self.fields['to_city'].queryset = self.instance.to_country.to_city_set.order_by('name')
  
-#Forma Validation in django
+#Form Validation in django
     def clean_price(self):
         price = self.cleaned_data.get("price")
         if price < 0:

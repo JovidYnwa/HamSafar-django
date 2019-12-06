@@ -2,20 +2,10 @@ from rest_framework import serializers
 
 from .models import Trips_daily, User
 
-class Trips_dailySerializer(serializers.ModelSerializer):
+class TripsDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trips_daily
-        fields = (
-            'owner',
-            'from_country',
-            'from_city',
-            'to_country',
-            'to_city',
-            'description',
-            'date_posted',
-            'price',
-            'settle_date'
-        )
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
