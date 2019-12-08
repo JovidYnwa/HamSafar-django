@@ -1,5 +1,8 @@
 from django import forms
 from .models import Trips_daily, Cities_dir
+from datetime import date, datetime
+
+
 
 class Trips_dailyForm(forms.ModelForm):
     from_city    = forms.Select()
@@ -38,10 +41,23 @@ class Trips_dailyForm(forms.ModelForm):
 #        elif self.instance.pk:
 #            self.fields['from_city'].queryset = self.instance.from_country.from_city_set.order_by('name')
 #            self.fields['to_city'].queryset = self.instance.to_country.to_city_set.order_by('name')
+
+    def clean(self):
+        #Form level vaidation
+        cleaned_data = super(Trips_dailyForm, self).clean()
+        from_city    = cleaned_data.get("from_city")
+        to_city      = cleaned_data.get("to_city")
+        if to_city == from_city:
+            raise forms.ValidationError("Города не должны совподать!")
+        return from_city   
  
 #Form Validation in django
-    def clean_price(self):
-        price = self.cleaned_data.get("price")
-        if price < 0:
-            raise forms.ValidationError("Неверная цена")
-        return price
+#    def clean_price(self):
+#        price = self.cleaned_data.get("price")
+#        if price < 0:
+#            raise forms.ValidationError("Неверная цена")
+#        return price
+    
+
+
+  

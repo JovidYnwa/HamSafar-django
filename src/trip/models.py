@@ -2,12 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse
+from .validators import clean_price, clean_settle_date
+
 
 
 class Profile(models.Model):
     user       = models.OneToOneField(User, on_delete = models.CASCADE)
     user_phone = PhoneNumberField()
     user_img   = models.ImageField(upload_to=None, blank=True, null=True)
+
+    def __str__(self):
+        return '{}  {}'.format(self.user, self.user_phone)
 
 class Countries_dir(models.Model):
     country_name = models.CharField(max_length = 50)
@@ -35,8 +40,8 @@ class Trips_daily(models.Model):
     to_city      = models.ForeignKey(Cities_dir, verbose_name="Город назначения", related_name='to_city', on_delete=models.CASCADE)
     description  = models.CharField(max_length = 250, verbose_name="Опсание")
     date_posted  = models.DateTimeField(auto_now=True, auto_now_add=False)
-    price        = models.DecimalField(max_digits=5, decimal_places=2, verbose_name="Цена", blank =True)
-    settle_date  = models.DateTimeField(auto_now=False, verbose_name="Дата поездки")
+    price        = models.DecimalField(max_digits=7, decimal_places=2, verbose_name="Цена", validators=[clean_price])
+    settle_date  = models.DateTimeField(auto_now=False, verbose_name="Дата поездки", validators = [clean_settle_date])
 
     def __srt__(self):
         return '{} - {}'.format(self.from_city, self.to_city)

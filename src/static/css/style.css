@@ -1,3 +1,6 @@
+.color_for_back{
+  background-color: #F8F9FA;
+}
 .navbar{
   opacity: 0.9;
   height: 9vh;
@@ -15,6 +18,7 @@
   margin-top: 9vh;
   border: black 3px black;
   min-height: 100vh;
+  padding : 4vh;
 }
 
 .box1{

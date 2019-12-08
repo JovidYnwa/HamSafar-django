@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse
 
-from .models import Trips_daily
+from .models import Trips_daily, Profile
 from .forms import Trips_dailyForm, Cities_dir
 
 # third party importts
@@ -37,17 +37,10 @@ class TestView(APIView):
         return Response(serializer.errors)
 
 
-class CreatListView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
-
-    serializer_class = TripsDetailSerializer
-    queryset         = Trips_daily.objects.all()
-
 class TripsDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class   = TripsDetailSerializer
     queryset           = Trips_daily.objects.all()
-
-
+    permission_classes = (IsOwnerOrReadOnly, )
     
     
 
@@ -119,11 +112,13 @@ def profile_view(request):
     greetting = 'Hey!'
     user = request.user
     full_name = user.get_full_name()
-    query = User.objects.get(pk=user.pk)
+    user_info_query = User.objects.get(pk=user.pk)
+    user_additional_query = Profile.objects.get(pk = user.pk)
     context = {
         'user': query,
         'greet': greetting,
-        'full_name': user.get_full_name()
+        'full_name': user.get_full_name(),
+        'additional_user_ifo': Profile
     }
     return render(request, 'account/profile.html', context)
 

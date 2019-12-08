@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<div class = "row justify-content-center">
+<div class = "row justify-content-center color_for_back">
   <div class="col-5">
     <div class="card">
       <div class="card-body">
@@ -35,8 +35,8 @@
         {% include "socialaccount/snippets/login_extra.html" %}
 
         {% else %}
-        <p>{% blocktrans %}If you have not created an account yet, then please
-        <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Если у вас нет аккаунта, пожалуйста 
+        <a href="{{ signup_url }}">зарегистрируйтесь </a>.{% endblocktrans %}</p>
         {% endif %}
 
         <form class="login" method="POST" novalidate action="{% url 'account_login' %}">

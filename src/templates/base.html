@@ -32,9 +32,11 @@
           <a class="nav-link" href="{% url 'account_login' %}">Вход <span class="sr-only">(current)</span></a>
         {% endif %}
         </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'account_profile' %}">Кабинет</a>
+          </li>
+        {% endif %}
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Меню
@@ -55,7 +57,7 @@
 
     <section id ="showcase">
 
-      <div class = "bond">
+      <div class = "bond color_for_back">
         
         {%block content%}
 
