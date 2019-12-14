@@ -3,16 +3,30 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse
 from .validators import clean_price, clean_settle_date
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 
 class Profile(models.Model):
     user       = models.OneToOneField(User, on_delete = models.CASCADE)
     user_phone = PhoneNumberField()
-    user_img   = models.ImageField(upload_to=None, blank=True, null=True)
+    user_img   = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return '{}  {}'.format(self.user, self.user_phone)
+
+    def get_absolute_url(self):
+        return reverse('profile_guest_view', kwargs= {'id': self.id}) 
+        
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save() 
 
 class Countries_dir(models.Model):
     country_name = models.CharField(max_length = 50)

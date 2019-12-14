@@ -15,11 +15,24 @@
 
 
 .bond{
-  margin-top: 9vh;
+   margin-top: 9vh;
   border: black 3px black;
   min-height: 100vh;
-  padding : 4vh;
 }
+
+
+/* .text-1{
+ color:red;
+ font-size: 15px;
+}
+
+@media (max-width: 576px) {
+  .text-1{
+    color:blue;
+  }
+} */
+
+
 
 .box1{
   background-image: url(../img/pamir.jpg);
@@ -28,6 +41,11 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+@media (max-width: 576px) {
+  .box1{
+    background-image: url(../img/pamir-min.jpg);
+  }
 }
 
 .box2{
@@ -62,7 +80,6 @@
 .trips_list{
   min-height: 30vh;
   left:20%;
-  top: 1vh;
 }
 
                           /* Upload trip */
@@ -89,4 +106,12 @@
   background-position: center center ;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.profile_box{
+  border: 1px solid black;
+}
+
+.profile_comment{
+  bottom: 20vh;
 }

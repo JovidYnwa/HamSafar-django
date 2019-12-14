@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse
 
-from .models import Trips_daily, Profile
+from .models import Trips_daily, Profile, User
 from .forms import Trips_dailyForm, Cities_dir
 
 # third party importts
@@ -75,17 +75,22 @@ def trip_creat_view(request):
 
 def list_of_trip(request):
     trips_query = Trips_daily.objects.all().order_by('-date_posted')
+    profile_query = Profile.objects.all()
     template_name = 'trip/trips_list.html'
     context = {
         'trips': trips_query,
+        'profile':profile_query
     }
     return render(request, template_name, context)
 
 
 def detail_of_trip(request, id):
     trip_query = get_object_or_404(Trips_daily, id=id)
+    owner = trip_query.owner
+    user_query = Profile.objects.get(id = owner.id)#.values('first_name')
     context = {
-        'trip': trip_query
+        'trip': trip_query,
+        'owner':user_query
     }
     return render(request, 'trip/trip_detail.html', context)
 
@@ -113,14 +118,23 @@ def profile_view(request):
     user = request.user
     full_name = user.get_full_name()
     user_info_query = User.objects.get(pk=user.pk)
-    user_additional_query = Profile.objects.get(pk = user.pk)
+ #   user_additional_query = Profile.objects.get(pk = user.pk)
     context = {
-        'user': query,
+        'user': user_info_query,
         'greet': greetting,
         'full_name': user.get_full_name(),
-        'additional_user_ifo': Profile
+ #       'additional_user_ifo': Profile
     }
     return render(request, 'account/profile.html', context)
+
+def profile_guest_view(request, id):
+    queryset = get_object_or_404(Profile, id=id)
+    template_name = 'trip/profile_for_guests.html'
+    context = {
+        'owner' : queryset,
+    }
+    return render(request, template_name, context)
+
 
 
 # View for Ajax call
