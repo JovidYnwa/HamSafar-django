@@ -7,9 +7,7 @@
 
 <div class="d-flex flex-row col-7 trips_list ">        
     <div class="col-2" style = height: 30vh;">
-        {% if  == profile. trip.owner %}
-        <img src="{{ profile.user_img.url }}" class="img-responsive rounded-circle" width="100%" height="50%" >
-        {% endif %}
+        <img src="{{ trip.owner.profile.user_img }}" class="img-responsive rounded-circle" width="100%" height="50%" >
     </div>
 
   <div class="d-flex flex-column col-10" style = position: relative;">

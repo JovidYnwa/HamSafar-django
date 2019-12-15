@@ -75,11 +75,9 @@ def trip_creat_view(request):
 
 def list_of_trip(request):
     trips_query = Trips_daily.objects.all().order_by('-date_posted')
-    profile_query = Profile.objects.all()
     template_name = 'trip/trips_list.html'
     context = {
         'trips': trips_query,
-        'profile':profile_query
     }
     return render(request, template_name, context)
 
