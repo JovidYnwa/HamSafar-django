@@ -11,7 +11,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user       = models.OneToOneField(User, on_delete = models.CASCADE)
     user_phone = PhoneNumberField()
-    user_img   = models.ImageField(blank=True, null=True)
+    user_img   = models.ImageField(default='default_profile.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return '{}  {}'.format(self.user, self.user_phone)

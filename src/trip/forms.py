@@ -6,10 +6,9 @@ from datetime import date, datetime
 class SignupForm(forms.ModelForm):
     user_phone = forms.CharField(label = 'Телефон', widget = forms.TextInput(
                                                     attrs ={
-                                                            'placeholder': '+992 918181818',
+                                                            'placeholder': 'Формат: +992 918181818',
                                                             }))
     class Meta:
-        user_phone = PhoneNumberField()
         model = Profile
         fields = ('user_phone',)
 
@@ -39,24 +38,13 @@ class Trips_dailyForm(forms.ModelForm):
                   'price',
                   'settle_date'                  
             )
+    
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['from_city'].queryset = Cities_dir.objects.none()
-        self.fields['to_city'].queryset   = Cities_dir.objects.none()
-
-        if 'from_country' and 'to_country' in self.data:
-            try:
-                from_country_id, to_country_id = int(self.data.get('from_country')), int(self.data.get('to_country'))
-                self.fields['from_city'].queryset = Cities_dir.objects.filter(country_id=from_country_id).order_by('city_name')
-                self.fields['to_city'].queryset   = Cities_dir.objects.filter(country_id=to_country_id).order_by('city_name')
-            except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty City queryset
-        #elif self.instance.pk:
-           # self.fields['from_city'].queryset = self.instance.from_country.from_city_set.order_by('city_name')
-           # self.fields['to_city'].queryset = self.instance.to_country.to_city_set.order_by('city_name')
-
-#Form level validation
+        #def __init__(self, *args, **kwargs):
+            #super().__init__(*args, **kwargs)
+            #self.fields['from_city'].queryset = Cities_dir.objects.none()
+            #self.fields['to_city'].queryset   = Cities_dir.objects.none()
+  
     def clean(self):
         super(Trips_dailyForm, self).clean
         from_city = self.cleaned_data.get("from_city")
@@ -65,16 +53,4 @@ class Trips_dailyForm(forms.ModelForm):
         if from_city == to_city:
             raise forms.ValidationError("Города не должны совподать!")
         return from_city
-    
-    
-
-#Field Validation in django
-#    def clean_price(self):
-#        price = self.cleaned_data.get("price")
-#        if price < 0:
-#            raise forms.ValidationError("Неверная цена")
-#        return price
-    
-
-
-  
+        

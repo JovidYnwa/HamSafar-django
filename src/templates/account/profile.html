@@ -18,10 +18,10 @@
 
           <div class="col-sm-4 position-static">
             <div class="d-flex justify-content-center">
-              <img src="img/default.jpg" class="img-thumbnail profile_img">
+                  <img class="rounded mx-auto d-block w-50" src="{{ user.profile.user_img.url }}">
             </div>
             <div class="d-flex justify-content-center">
-              <button type="button" class="btn btn-secondary">Добавить Фото</button>
+              <button type="button" class="btn btn-secondary mt-2">Добавить Фото</button>
             </div>
           </div>
        </div>
@@ -30,7 +30,7 @@
     <!--Comment Section-->
     <div class="container w-100" style ='border: 1px solid black; margin-top: 1vh;'>
       <div class="col-6" style = 'border: 1px black solid'>
-        Оставить отзыв
+        <h4 class = "text-muted">Оставить отзыв</h4>
       </div>
       <div class="row">
         <div class="col-3 " style = 'border: 1px black solid'>
@@ -40,7 +40,7 @@
       </div>
       <div class="row">
         <div class="col-md-9 offset-md-3" style = 'border: 1px black solid'>
-          <textarea name="" id="" cols="100" rows="3">Отоичный Водитель</textarea>
+          <textarea name="" id="" cols="100" rows="3">Отличный Водитель</textarea>
         </div>
         <div class="col-md-3 offset-md-9" style = 'border: 1px black solid'>
           <button type="button" class="btn btn-info">Оставить</button>

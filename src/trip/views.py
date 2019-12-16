@@ -84,13 +84,13 @@ def list_of_trip(request):
 
 def detail_of_trip(request, id):
     trip_query = get_object_or_404(Trips_daily, id=id)
-    owner = trip_query.owner
-    user_query = Profile.objects.get(id = owner.id)#.values('first_name')
+    user_query = Profile.objects.get(user = trip_query.owner)#.values('first_name')
+    template_name = 'trip/trip_detail.html'
     context = {
         'trip': trip_query,
         'owner':user_query
     }
-    return render(request, 'trip/trip_detail.html', context)
+    return render(request, template_name, context)
 
 
 def edit_of_trip(request, id):
@@ -103,7 +103,7 @@ def edit_of_trip(request, id):
             messages.info(request, 'Данные были обновлены')
             return redirect('../')
         else:
-            return HttpResponse('This is not your post pice shit!!!')
+            return HttpResponse('This is not your post pice of shit!!!')
     template_name = 'trip/trip_create.html'
     context = {
         'form': form
@@ -112,18 +112,14 @@ def edit_of_trip(request, id):
 
 
 def profile_view(request):
-    greetting = 'Hey!'
     user = request.user
-    full_name = user.get_full_name()
     user_info_query = User.objects.get(pk=user.pk)
- #   user_additional_query = Profile.objects.get(pk = user.pk)
+    template_name = 'account/profile.html'
     context = {
         'user': user_info_query,
-        'greet': greetting,
         'full_name': user.get_full_name(),
- #       'additional_user_ifo': Profile
     }
-    return render(request, 'account/profile.html', context)
+    return render(request, template_name, context)
 
 def profile_guest_view(request, id):
     queryset = get_object_or_404(Profile, id=id)
