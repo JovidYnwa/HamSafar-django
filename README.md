@@ -15,10 +15,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installation
 
-
-This project was written in Django. Therefor you should have python3 install in you machine. All third party packedges that you also in install are in requirements.txt file.
-Use the package manager pip to install requirements.
-=======
 This project was written in Django. Therefore, you should have python3 install in you machine. All third packages that you have to install are in requirements.txt file. Use the package manager pip to install requirements.
 
 ```
