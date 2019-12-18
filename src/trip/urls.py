@@ -10,11 +10,11 @@ from .views import (main_view,
                     edit_of_trip,
                     #APIVIEWS   
                     TestView,
-                    UserCreateAPIView,
                     TripsDetailView,
             )
 
 from rest_framework.documentation import include_docs_urls
+from rest_framework.authtoken.views import obtain_auth_token
 
 #app_name = 'trip'
 urlpatterns = [
@@ -30,11 +30,12 @@ urlpatterns = [
 
     #If you're intending to use the browsable API you'll probably also want to add REST framework's
     #login and logout views
-    path('api/rest-auth/', include('rest_auth.urls')),
-    path('api-auth/', include('rest_framework.urls')),
     path('api/docs/', include_docs_urls(title='HamSafar API')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('api/token/', obtain_auth_token, name='obtain-token'),
     path('api/trip_create/', TestView.as_view(), name = 'trip-list'),
-    path('api/usercreation/', UserCreateAPIView.as_view()),
     path('api/trip-detail/<int:pk>/', TripsDetailView.as_view(), name = 'trip-detail'),
 ]
 

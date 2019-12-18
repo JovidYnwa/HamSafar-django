@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-
+#Customizing the user model by extending it
 class Profile(models.Model):
     user       = models.OneToOneField(User, on_delete = models.CASCADE)
     user_phone = PhoneNumberField()
@@ -28,6 +28,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save() 
 
+#The list of contries model
 class Countries_dir(models.Model):
     country_name = models.CharField(max_length = 50)
     country_code = models.CharField(max_length = 50)
@@ -35,6 +36,7 @@ class Countries_dir(models.Model):
     def __str__(self):
         return '{}'.format(self.country_name)
 
+#The list of cities model
 class Cities_dir(models.Model):
     country   = models.ForeignKey(Countries_dir, on_delete=models.CASCADE)
     city_name = models.CharField(max_length = 50)
@@ -44,8 +46,7 @@ class Cities_dir(models.Model):
         return '{}'.format(self.city_name)
 
 
-#User = settings.AUTH_USER_MODEL
-
+#Trip Model
 class Trips_daily(models.Model):
     owner        = models.ForeignKey(User, on_delete=models.CASCADE)
     from_country = models.ForeignKey(Countries_dir, verbose_name="Страна выезда", related_name='from_country', on_delete=models.CASCADE)
@@ -66,6 +67,15 @@ class Trips_daily(models.Model):
     def get_update_url(self):
         return reverse('edit_of_trip', kwargs= {'id':self.id})
 
+#Commetary of trips model
+class Comment(models.Model):
+    profile_owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    commentator   = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment_text  = models.CharField(max_length = 250, blank=True, verbose_name="Оставьте комментарий")
+    date_posted   = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    def __str__(self):
+        return '{}, {}'.format(self.commentator, self.date_posted)
 
 
 

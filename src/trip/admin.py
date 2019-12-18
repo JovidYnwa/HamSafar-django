@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 
 from .models import (Profile,
                      Countries_dir,
-                      Cities_dir,
-                      Trips_daily)
+                     Cities_dir,
+                     Trips_daily,
+                     Comment)
 
 
 
@@ -37,3 +38,7 @@ class Locations_dicAdmin(admin.ModelAdmin):
 @admin.register(Trips_daily)
 class Trips_dailycAdmin(admin.ModelAdmin):
     list_display = ('from_city', 'to_city')
+
+@admin.register(Comment)
+class Trips_dailycAdmin(admin.ModelAdmin):
+    list_display = ('commentator', 'date_posted')

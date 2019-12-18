@@ -7,8 +7,14 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponse
 
-from .models import Trips_daily, Profile, User
-from .forms import Trips_dailyForm, Cities_dir
+from .models import (Comment,
+                     Trips_daily,
+                     Profile,
+                     User,)
+
+from .forms import (CommentForm,
+                    Trips_dailyForm,
+                    Cities_dir,)
 
 # third party importts
 from rest_framework import mixins
@@ -18,8 +24,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .serializers import TripsDetailSerializer, UserSerializer
-
+from .serializers import TripsDetailSerializer
 
 class TestView(APIView):
     permission_classes = (IsAuthenticated,)
@@ -32,7 +37,7 @@ class TestView(APIView):
     def post(self, request, *args, **kwags):
         serializer = TripsDetailSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(owner = self.request.user) # you should put user authomatically 
             return Response(serializer.data)
         return Response(serializer.errors)
 
@@ -40,15 +45,9 @@ class TestView(APIView):
 class TripsDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class   = TripsDetailSerializer
     queryset           = Trips_daily.objects.all()
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (IsOwnerOrReadOnly,)
     
     
-
-class UserCreateAPIView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (AllowAny,)
-
 
 def main_view(request):
     return render(request, 'trip/index.html', {})
@@ -64,7 +63,6 @@ def trip_creat_view(request):
         instance.save()
     if form.errors:
         errors = form.errors
-
     template_name = 'trip/trip_create.html'
     context = {
         "form": form,
@@ -112,20 +110,33 @@ def edit_of_trip(request, id):
 
 
 def profile_view(request):
-    user = request.user
+    user            = request.user
     user_info_query = User.objects.get(pk=user.pk)
-    template_name = 'account/profile.html'
+    template_name   = 'account/profile.html'
     context = {
-        'user': user_info_query,
+        'user'     : user_info_query,
         'full_name': user.get_full_name(),
     }
     return render(request, template_name, context)
 
 def profile_guest_view(request, id):
-    queryset = get_object_or_404(Profile, id=id)
+    queryset_profile = get_object_or_404(Profile, id=id)
+    queryset_comments = Comment.objects.filter(profile_owner = queryset_profile)
+    user = request.user
     template_name = 'trip/profile_for_guests.html'
+    comment_form = CommentForm(data=request.POST)
+    if request.method == 'POST':
+        if comment_form.is_valid():
+            instance = comment_form.save(commit=False)
+            instance.commentator = request.user
+            instance.profile_owner = queryset_profile
+            instance.save()
+            comment_form()
     context = {
-        'owner' : queryset,
+        'owner'   : queryset_profile,
+        'comments': queryset_comments,
+        'form'    : comment_form,
+        'user_in'     : user,
     }
     return render(request, template_name, context)
 

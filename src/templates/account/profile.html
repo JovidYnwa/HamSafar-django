@@ -27,7 +27,7 @@
        </div>
     </div>
 
-    <!--Comment Section-->
+    <!--Comment Form-->
     <div class="container w-100" style ='border: 1px solid black; margin-top: 1vh;'>
       <div class="col-6" style = 'border: 1px black solid'>
         <h4 class = "text-muted">Оставить отзыв</h4>
@@ -40,13 +40,28 @@
       </div>
       <div class="row">
         <div class="col-md-9 offset-md-3" style = 'border: 1px black solid'>
-          <textarea name="" id="" cols="100" rows="3">Отличный Водитель</textarea>
+          <textarea name="" id="" cols="90" rows="3">Отличный Водитель</textarea>
         </div>
         <div class="col-md-3 offset-md-9" style = 'border: 1px black solid'>
           <button type="button" class="btn btn-info">Оставить</button>
         </div>
       </div>
-      <div class='container w-100 mt-2' style = 'border: 1px black solid'> all of the comments</div>
+      
+      <!-- All of the commets -->
+      {% for comment in commets %}
+      <div class='container w-100 mt-2' style = 'border: 1px black solid'> 
+        <div class="row">
+          <div class="col-3 " style = 'border: 1px black solid'>
+            <img class="rounded mx-auto d-block w-30" src="{{ user.profile.user_img.url }}">
+          </div>
+          <div class="col-9" style = 'border: 1px black solid'>{{comment.commentator}}</div>
+          <div class="col-md-9 offset-md-3" style = 'border: 1px black solid'>
+            <p>{{comment.comment_text}}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
     </div>
   </div>
 

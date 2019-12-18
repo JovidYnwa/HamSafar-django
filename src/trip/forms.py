@@ -1,5 +1,9 @@
 from django import forms
-from .models import Trips_daily, Cities_dir, Profile, User
+from .models import  (Comment,
+                      Cities_dir,
+                      Profile,
+                      User,
+                      Trips_daily,)
 from phonenumber_field.modelfields import PhoneNumberField
 from datetime import date, datetime
 
@@ -53,4 +57,9 @@ class Trips_dailyForm(forms.ModelForm):
         if from_city == to_city:
             raise forms.ValidationError("Города не должны совподать!")
         return from_city
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('comment_text',)
         
