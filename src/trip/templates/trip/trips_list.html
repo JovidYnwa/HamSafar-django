@@ -5,35 +5,31 @@
 
 {% for trip in trips %}
 
-<div class="mb-2 container col-7" style="background-color: white;"> 
+<div class="container w-75" style="background-color: white;"> 
   <div class="row">       
-     <div class="col-2" style = "left: 10vh;border: 1px solid black;" >
-        <img src="{{ trip.owner.profile.user_img.url }}" class="img-responsive rounded-circle" width="55%" height="40%" >
+     <div class="col-2">
+        <img src="{{ trip.owner.profile.user_img.url }}" class="img-responsive rounded-circle" width="70%">
     </div>
 
-    <div class="container col-10" style = "position: relative; border: 1px solid black;" >
-            <div style="border:1px solid black; height:20%;">
+    <div class="container col-10">
+
+
+        <div class="row">
+            <div class="container">  
                 <h4 class = "text-primary">
-                    <a href= '{{ trip.get_absolute_url }}'>{{trip.from_city}} - {{trip.to_city}}</a>
+                    <a href= '{{ trip.get_absolute_url}}'>{{trip.from_city}} - {{trip.to_city}}</a>
                     <p class = "time_autoriz text-muted"> <strong>Опубликовано: {{trip.date_posted}}</strong></p>
-                </h4>
+                </h4> 
             </div>
 
-            <div style="width:100%; height:80%; border: 1px solid black;">
-                <div>
-                    <h5 >
-                        
-                        {{trip.owner.first_name}}
-                    </h5>
-                </div>
-                <div>
-                    <p style="font-size: 1.1vw;">{{trip.description}}</p>
-                    <p style="font-size: 1.1vw;">{{trip.owner}}</p>
-
-                </div>
-            </div>
+            <div class="container">
+               <p style="font-size: 1.1vw;">Пользователь: <strong>{{trip.owner}}</strong></p>
+               <p style="font-size: 1.1vw;">{{trip.description}}</p>
+           </div>
+        </div>
     </div>
   </div>
+  <hr>    
 </div>
 {% endfor %}
 

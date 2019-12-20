@@ -13,7 +13,9 @@
     <div class="card">
       <div class="card-body">
 
-        <div class='container logo' style = 'width: 37vh; height: 47vh; margin-bottom: 2vh'></div> 
+        <div class='container mb-2' >
+          <img src="../../static/img/logo.png" class="img-fluid" alt="Responsive image">
+        </div>
 
         {% get_providers as socialaccount_providers %}
 
@@ -35,7 +37,7 @@
         {% include "socialaccount/snippets/login_extra.html" %}
 
         {% else %}
-        <p>{% blocktrans %}Если у вас нет аккаунта, пожалуйста 
+        <p class="h6">{% blocktrans %}Если у вас нет аккаунта, пожалуйста 
         <a href="{{ signup_url }}">зарегистрируйтесь </a>.{% endblocktrans %}</p>
         {% endif %}
 
@@ -45,8 +47,8 @@
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
+          <button class="btn btn-primary btn-lg btn-block btn-primary" type="submit">{% trans "Войти" %}</button>
           <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Забыли Пароль?" %}</a>
-          <button class="primaryAction btn btn-primary" type="submit">{% trans "Войти" %}</button>
         </form>
 
     </div>

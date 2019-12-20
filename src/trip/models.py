@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from django.urls import reverse
-from .validators import clean_price, clean_settle_date
+from .validators import clean_price, clean_settle_date, clean_comment_text
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -71,20 +71,8 @@ class Trips_daily(models.Model):
 class Comment(models.Model):
     profile_owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     commentator   = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment_text  = models.CharField(max_length = 250, blank=True, verbose_name="Оставьте комментарий")
+    comment_text  = models.CharField(max_length = 250, blank=True, null=False)
     date_posted   = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     def __str__(self):
         return '{}, {}'.format(self.commentator, self.date_posted)
-
-
-
-
-
-
-   
-
-
-
-
-

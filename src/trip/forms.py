@@ -44,11 +44,8 @@ class Trips_dailyForm(forms.ModelForm):
             )
     
 
-        #def __init__(self, *args, **kwargs):
-            #super().__init__(*args, **kwargs)
-            #self.fields['from_city'].queryset = Cities_dir.objects.none()
-            #self.fields['to_city'].queryset   = Cities_dir.objects.none()
-  
+
+"""   
     def clean(self):
         super(Trips_dailyForm, self).clean
         from_city = self.cleaned_data.get("from_city")
@@ -56,9 +53,14 @@ class Trips_dailyForm(forms.ModelForm):
         print(from_city, to_city)
         if from_city == to_city:
             raise forms.ValidationError("Города не должны совподать!")
-        return from_city
+        return from_city """
 
 class CommentForm(forms.ModelForm):
+    comment_text  = forms.CharField(label = 'Отзыв',widget=forms.Textarea(
+                                                    attrs={
+                                                            'placeholder':'Оставить отзыв',
+                                                            'rows':4,
+                                                    }))
     class Meta:
         model = Comment
         fields = ('comment_text',)

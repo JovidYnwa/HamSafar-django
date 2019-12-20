@@ -1,20 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content%}
-        <p>Дата Поездки {{trip.owner.id}}</p>
-        <p>Страна отправки {{trip.from_country}}</p>
-        <p>Страна назначение  {{trip.to_country}}</p>
-        <p>Город отправки {{trip.from_city}}</p>
-        <p>Город назначения {{trip.to_city}}</p>
-        <p>Описание {{trip.description}}</p>
-        <p>Стоимость {{trip.price}}</p>
-        <p>Опубликовоно {{trip.date_posted}}</p>
-        <p>Дата Поездки {{trip.date_posted}}</p>
-        <a href= '{{ owner.get_absolute_url }}'><p> {{owner.user}}</p></a>
+  <div class="container w-75">
 
-        {% if request.user == trip.owner %}
-                <button> <a href='{{trip.get_update_url}}'>Изменить </a></button>
-        {% endif %}
+        <!-- Profile Section -->  
+      <div class="container profile_box">
+           <div class="row">
+                <div class="d-flex flex-column col-sm-7">
+
+                        <div class="">
+                                <p class = "px-5">пользователь: <strong>{{owner.user}}</strong></p>
+                             </div>
+
+                        <div class="">
+                                <p class = "px-5">Телефон: <strong>{{owner.user_phone}}</strong></p>
+                        </div>
+                        <div class="">
+                                <a href= '{{ owner.get_absolute_url }}'>
+                                     <p class = "px-5"> <strong>Оставить\посмотреть отзывы пользователя</strong></p>
+                                </a>
+                        </div>
+                </div>            
+                        <div class="col-sm-4 position-static">
+                          <div class="d-flex justify-content-center">
+                                <img src="{{owner.user_img.url}}" class="rounded mx-auto d-block w-50" >
+                           </div>
+                        </div>
+            </div>
+        </div>
+        <!-- Trip Info Section --> 
+        <div class="container profile_box mt-2">
+           <div class="row">
+
+                <div class="w-100"></div>
+                <div class="col">
+                  <p>Начальный пункт: <strong>{{trip.from_country}} ({{trip.from_city}})</strong></p>
+                </div>
+                <div class="col">
+                  <p>Пункт назначения: <strong>{{trip.to_country}} ({{trip.to_city}})</strong></p>
+                </div>
+                <div class="w-100"></div>
+
+                <div class="col"><p> Цена поездки </p></div>
+                <div class="col"><p> <strong>{{trip.price}}</strong> сомони </p></div>
+                
+                <div class="w-100"></div>
+                <div class="col">Дата поездки:</div>
+                <div class="col"><p><strong>{{trip.settle_date}}</strong></p></div>
+           </div>
+        </div>
+
+          <div class="container profile_box mt-2" >
+              <h6>Описание</h6> 
+              <p>{{trip.description}}</p>             
+          </div>
+
+        <div class="container" >
+                {% if request.user == trip.owner %}
+                <button class = 'btn btn-primary'> 
+                        <a class = 'button_href' href='{{trip.get_update_url}}'>Изменить</a>
+                </button>
+                {% endif %}             
+        </div>
+  </div>
+
 
 
 

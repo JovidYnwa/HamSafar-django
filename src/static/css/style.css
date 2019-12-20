@@ -1,5 +1,5 @@
 .color_for_back{
-  background-color: #F8F9FA;
+  background-color: #EDEEF0;
 }
 .navbar{
   opacity: 0.9;
@@ -96,18 +96,29 @@
 }
 
 .logo{
-  width: 50vh;
-  height: 75vh;
+  height: 30%;
   background-image: url(../img/reg_logo.jpg);
   background-position: center center ;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.profile_box{
-  border: 1px solid black;
-}
-
 .profile_comment{
   bottom: 20vh;
 }
+
+/* ------------------------------- Helpers -------------------------------*/
+.profile_box{
+  background-color: white;
+}
+
+.button_href{
+  text-decoration:none;
+  color: inherit;
+}
+
+.bor{
+  border: 1px solid black;
+}
+/*-------------------------------  */
+

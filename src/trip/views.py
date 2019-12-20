@@ -131,7 +131,6 @@ def profile_guest_view(request, id):
             instance.commentator = request.user
             instance.profile_owner = queryset_profile
             instance.save()
-            comment_form()
     context = {
         'owner'   : queryset_profile,
         'comments': queryset_comments,

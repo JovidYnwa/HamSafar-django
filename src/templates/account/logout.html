@@ -5,27 +5,30 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center color_for_back">  
-  <div class="col-5 ">
+
+<div class = "row justify-content-center w-100 color_for_back">
+  <div class="col-5">
     <div class="card">
       <div class="card-body">
 
-        <div class='container logo' style = 'width: 37vh; height: 47vh; margin-bottom: 2vh'></div> 
- 
-        <p>{% trans 'Вы деействительно хотите выйти?' %}</p>
-          
+        <div class='container' >
+          <img src="../../static/img/logo.png" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="container mt-2"> 
+          <p class="h3">{% trans 'Вы деействительно хотите выйти?' %}</p>          
           <form method="post" action="{% url 'account_logout' %}">
             {% csrf_token %}
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
             {% endif %}
-            <button type="submit" class="btn btn-danger ">{% trans 'Выход' %}</button></form>
-          
-        </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block btn-danger">{% trans 'Выход' %}</button>
+          </form>
+         </div>
 
-      </div>
+        </div>
     </div>
   </div>
 </div>
+
 
 {% endblock %}

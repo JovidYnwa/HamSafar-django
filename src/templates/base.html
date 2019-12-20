@@ -17,7 +17,7 @@
   <body>
 
 
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style= "opacity: 0.95; height: 9vh;">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" style= "opacity: 0.95;">
       <a class="navbar-brand" href="{% url 'home' %}">HamSafar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -37,14 +37,11 @@
           <a class="nav-link" href="{% url 'account_profile' %}">Кабинет</a>
           </li>
         {% endif %}
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Меню
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'trip_add' %}">Предложить поездку</a>
-          <a class="dropdown-item" href="{% url 'list_of_trips' %}">Найти поездку</a>
-        </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'trip_add' %}">Предложить поездку</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'list_of_trips' %}">Найти поездку</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -57,7 +54,7 @@
 
     <section id ="showcase">
 
-      <div class = "bond row p-3 mt-10 color_for_back">
+      <div class = "bond row  mt-10 color_for_back">
         
         {%block content%}
 

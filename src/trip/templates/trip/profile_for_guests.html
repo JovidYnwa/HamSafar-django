@@ -8,11 +8,10 @@
     <div class="container p-2 profile_box">
         <div class="row mt-4">
           <div class="col-sm-8">
-              <p class = "px-5"><strong>имя:</strong> {{owner}}</p>
-              <p class = "px-5"><strong>почта:</strong> </p>
+              <p class = "px-5"><strong>имя:</strong> {{owner.user}}</p>
+              <p class = "px-5"><strong>почта:</strong> {{owner.email}}</p>
               <p class = "px-5"><strong>кличество поездок:</strong> 8</p>
               <p class = "px-5"><strong>отзывы:</strong> 6</p>
-              <p class = "px-5"><strong>user.request:</strong> {{user_in}}</p>
           </div>
 
           <div class="col-sm-4 position-static">
@@ -24,45 +23,38 @@
     </div>
 
     <!--Comment Form-->
-    <div class="container w-100" style ='border: 1px solid black; margin-top: 1vh;'>
-      <div class="col-6" style = 'border: 1px black solid'>
-        <h4 class = "text-muted">Оставить отзыв</h4>
-      </div>
+    <div class="container w-100 profile_box mt-3">
       <div class="row">
-        <div class="col-3 " style = 'border: 1px black solid'>
-          <img src="{{user_in.profile.user_img.url}}" class="img-responsive rounded-circle" width="45%">
+        <div class="col-2 profile_box">
+          <img src="{{user_in.profile.user_img.url}}" class="img-responsive rounded-circle" width="80%">
         </div>
-        <div class="col-9" style = 'border: 1px black solid'>{{user_in.first_name}}</div>
+        <div class="col-10 profile_box">
+          <p>Пользователь: <strong>{{user_in}}</strong></p>
+          <form method="post" style="margin-top: 1em;">
+            {{ form | crispy }}
+            {% csrf_token %}
+          <button type="submit" class="btn btn-info mb-2 offset-md-5">Коментировать</button>
+         </form>
+        </div>        
       </div>
-      <div class="row">
-        <div class="col-md-8 offset-md-4" style = 'border: 1px black solid'>
-          <form method="post" style="margin-top: 1.3em;">
-                {{ form | crispy }}
-                {% csrf_token %}
-              <button type="submit" class="btn btn-primary  btn-lg">Коментировать</button>
-           </form>
-        </div>
-      </div>
-      
-      <!-- All of the commets -->
-      {% for comment in comments %}
-        <div class='container w-100 mt-2' style = 'border: 1px black solid'> 
-           <div class="row">
-          <div class="col-3 " style = 'border: 1px black solid'>
-            <img class="img-responsive rounded-circle" width="45%" src="{{comment.commentator.profile.user_img.url}}">
-          </div>
-                <div class="col-9" style = 'border: 1px black solid'>
-                        {{comment.commentator.first_name}}, {{comment.date_posted}}
-                </div>
-              <div class="col-md-9 offset-md-3" style = 'border: 1px black solid'>
-                 <p>{{comment.comment_text}}</p>
-              </div>
-          </div>
-        </div>
-      {% endfor %}
-
-
     </div>
+    <!-- All of the commets -->
+      {% for comment in comments %}
+      <div class='container profile_box w-100 mt-2'> 
+        <div class="row">
+          <div class="col-2 profile_box">
+            <img class="img-responsive rounded-circle" width="40%" src="{{comment.commentator.profile.user_img.url}}">
+          </div>
+          <div class="col-10 profile_box" >
+                  {{comment.commentator.first_name}}, {{comment.date_posted}}
+          </div>
+        </div>
+        <hr>
+        <div class="col-md-12 profile_box" >
+          <p>{{comment.comment_text}}</p>
+        </div>
+      </div>
+    {% endfor %}
   </div>
 
 

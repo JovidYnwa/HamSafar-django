@@ -12,3 +12,8 @@ def clean_settle_date(value):
     if datetime.date(value) < today:
         raise ValidationError("Неверная дата")
     return value 
+
+def clean_comment_text(value):
+    if value == NULL:
+        raise ValidationError("Поле пусто")
+    return value 
