@@ -1,26 +1,33 @@
 {% extends 'base.html' %}
+{{ form.media }}
 {% load crispy_forms_tags %} 
+{% load staticfiles%}
+
+{% block extra_head %}
+  <!-- XDSoft DateTimePicker -->
+  <link rel="stylesheet" href="{% static 'css/jquery.datetimepicker.min.css' %}">
+  <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script> 
+{% endblock %}
 
 {% block content %}
 
-<div class="row justify-content-center w-100">
-  <div class="col-5 add_trip_box">
-    
-    <h2>Форма поездки</h2>
+  <div class="row justify-content-center w-100">
+    <div class="col-5 add_trip_box">
+      
+      <h2>Форма поездки</h2>
 
-    <form method="post" id="Trips_dailyForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
-      {% csrf_token %}
-      <table>
-        {{ form|crispy }}
-      </table>
-        <button type="submit" class="btn btn-info">Сохранить</button>
-        <a href="{% url 'home' %}">Вернутся</a>
-    </form>
+      <form method="post" id="Trips_dailyForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+        {% csrf_token %}
+        <table>
+          {{ form|crispy }}
+        </table>
+          <button type="submit" class="btn btn-info">Сохранить</button>
+          <a href="{% url 'home' %}">Вернутся</a>
+      </form>
 
+    </div>
   </div>
-</div>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>
     $("#id_from_country").change(function () {
       var url = $("#Trips_dailyForm").attr("data-cities-url");  // get the url of the `load_cities` view

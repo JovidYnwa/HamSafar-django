@@ -1,11 +1,14 @@
 from django import forms
 from .models import  (Comment,
                       Cities_dir,
+                      Countries_dir,
                       Profile,
                       User,
                       Trips_daily,)
 from phonenumber_field.modelfields import PhoneNumberField
+#from .widgets import EventSplitDateTime
 from datetime import date, datetime
+from .widgets import XDSoftDateTimePickerInput
 
 class SignupForm(forms.ModelForm):
     user_phone = forms.CharField(label = 'Телефон', widget = forms.TextInput(
@@ -26,35 +29,24 @@ class Trips_dailyForm(forms.ModelForm):
     description  = forms.CharField(label = 'Описание',widget=forms.Textarea(
                                                         attrs={
                                                                 'placeholder':'Опишите детали поездки',
-                                                                'col':35,
+                                                                'rows':5,
                                                         }))
-    settle_date  = forms.DateTimeField(label = 'Дата поездки', input_formats=['%d.%m.%Y'], widget=forms.DateTimeInput(
-                                                        attrs={
-                                                                'placeholder':'19.01.2020',
-                                                        }))
+    settle_date = forms.DateTimeField(label = 'Выберете дату',input_formats=['%d/%m/%Y %H:%M'], widget=XDSoftDateTimePickerInput())
     class Meta:
         model = Trips_daily
-        fields = ('from_country',
-                  'from_city',
-                  'to_country',
-                  'to_city',
-                  'description',
-                  'price',
-                  'settle_date'                  
-            )
-    
+        exclude = ['owner']
 
+    def clean(slef):
+        cleaned_data = super().clean()
+        from_city = cleaned_data.get('from_city')
+        to_city = cleaned_data.get('to_city')
 
-"""   
-    def clean(self):
-        super(Trips_dailyForm, self).clean
-        from_city = self.cleaned_data.get("from_city")
-        to_city   = self.cleaned_data.get("to_city")
-        print(from_city, to_city)
         if from_city == to_city:
-            raise forms.ValidationError("Города не должны совподать!")
-        return from_city """
+            raise forms.ValidationError('Города не должны совподать')        
 
+
+
+#Commet model
 class CommentForm(forms.ModelForm):
     comment_text  = forms.CharField(label = 'Отзыв',widget=forms.Textarea(
                                                     attrs={
@@ -64,4 +56,6 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment_text',)
-        
+
+
+#Form for datepicker
