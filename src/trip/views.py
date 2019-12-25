@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import (render,
                               redirect,
+                              reverse,
                               get_object_or_404)
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import (Comment,
                      Trips_daily,
@@ -61,6 +63,7 @@ def trip_creat_view(request):
         instance = form.save(commit=False)
         instance.owner = request.user
         instance.save()
+        return HttpResponseRedirect(reverse('list_of_trips'))
     if form.errors:
         errors = form.errors
     template_name = 'trip/trip_create.html'
@@ -71,8 +74,20 @@ def trip_creat_view(request):
     return render(request, template_name, context)
 
 
+""" def listing(request):
+    contact_list = Contacts.objects.all()
+    paginator = Paginator(contact_list, 25) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    contacts = paginator.get_page(page)
+    return render(request, 'list.html', {'contacts': contacts}) """
+
 def list_of_trip(request):
     trips_query = Trips_daily.objects.all().order_by('-date_posted')
+    paginator = Paginator(trips_query, 20) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    trips_query = paginator.get_page(page)
     template_name = 'trip/trips_list.html'
     context = {
         'trips': trips_query,

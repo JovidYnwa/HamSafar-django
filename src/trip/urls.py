@@ -24,8 +24,8 @@ urlpatterns = [
     path('trips/', list_of_trip, name='list_of_trips'),
     path('trip/<int:id>/', detail_of_trip, name='detail_of_trip'),
     path('trip/<int:id>/edit/', edit_of_trip, name='edit_of_trip'),
-    #path('add/', TripCreateView.as_view(), name='trip_add'),
-    path('add/', trip_creat_view, name='trip_add'),
+    #path('add/', TripCreateView.as_view(), name='trip-create'),
+    path('trip-create/', trip_creat_view, name='trip-create'),
     path('ajax/load-cities/', load_cities, name='ajax_load_cities'),
 
     #If you're intending to use the browsable API you'll probably also want to add REST framework's

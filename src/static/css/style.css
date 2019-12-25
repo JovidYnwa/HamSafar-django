@@ -15,7 +15,7 @@
 
 
 .bond{
-   margin-top: 9vh;
+  margin-top: 9vh;
   border: black 3px black;
   min-height: 100vh;
 }
@@ -110,11 +110,6 @@
 /* ------------------------------- Helpers -------------------------------*/
 .profile_box{
   background-color: white;
-}
-
-.button_href{
-  text-decoration:none;
-  color: inherit;
 }
 
 .bor{
