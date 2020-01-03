@@ -1,7 +1,7 @@
 
 # Project Title
 
-HamSafar is a free platform where everyone can find a companience for a trip.  
+HamSafar is a free platform where everyone can find a companion for a trip.  
 
 # HamSafar
 
